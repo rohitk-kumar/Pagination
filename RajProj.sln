@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RajProj", "RajProj.csproj", "{A10C2105-366F-4912-80B2-05AEFD8877CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{41DECF10-339E-40C7-BC2F-5C102AD720F4}"
+	ProjectSection(SolutionItems) = preProject
+		Procedure.txt = Procedure.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A10C2105-366F-4912-80B2-05AEFD8877CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A10C2105-366F-4912-80B2-05AEFD8877CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A10C2105-366F-4912-80B2-05AEFD8877CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A10C2105-366F-4912-80B2-05AEFD8877CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8486CAB-6031-4046-BE17-12517F53D18B}
+	EndGlobalSection
+EndGlobal

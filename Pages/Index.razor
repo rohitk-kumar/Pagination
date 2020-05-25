@@ -1,0 +1,61 @@
+﻿@page "/"
+@using RajProj.Data
+@using RajProj.ViewModels
+@using RajProj.Models
+@inject MerchantInfoViewModel  viewModel
+
+   
+
+<h1>Hello, Raj!</h1>
+
+Welcome to your Blazor site. Rid from the vile menace of Java Script!!! And VB :-)
+<div class="dropdown show">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        # Of Rows
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" @onclick="@(() => GetAllAccounts("10"))" href="#">10</a>
+        <a class="dropdown-item" @onclick="@(() => GetAllAccounts("30"))" href="#">30</a>
+        <a class="dropdown-item" @onclick="@(() => GetAllAccounts("50"))" href="#">50</a>
+        @*<input type="submit" value="Create Merchant" class="btn btn-primary" @onclick="@(() => GetAllAccounts(100))" />*@
+    </div>
+</div>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Merchant Information Component</th>
+                <th>Add Merchant Component</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <MerchantInfoView></MerchantInfoView>
+                </td>
+                <td>
+                    <RajProj.Views.AddMerchant></RajProj.Views.AddMerchant>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+@code 
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await viewModel.GetMerchantsAsync(DateTime.Now);
+        viewModel.RowCount = 10;
+    }
+    private void GetAllAccounts(string x)
+    {
+        viewModel.RowCount = Convert.ToInt32(x);
+        viewModel.PageId = 1;
+        viewModel.EA.GetEvent<DbUpdatedEvent>().Publish(x);// not sure if a UI should be publishing an event here.
+        StateHasChanged();
+    }
+}
+

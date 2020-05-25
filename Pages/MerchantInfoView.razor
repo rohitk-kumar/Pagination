@@ -1,0 +1,121 @@
+﻿@page "/merchantinfo"
+
+@using RajProj.Data
+@using RajProj.ViewModels
+@using RajProj.Models
+@inject MerchantInfoViewModel  viewModel
+@using System.Threading
+
+<style>
+    .center {
+        text-align: center;
+    }
+
+    .pagination {
+        display: inline-block;
+    }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+            font-size: 22px;
+        }
+
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+                border: 1px solid #4CAF50;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+            }
+</style>
+@if (merchants == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Merchant Name</th>
+                <th>Account</th>
+                <th>Daily Max Transaction Amount</th>
+                <th>Daily Min Transaction Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var merchant in viewModel.Merchants)
+            {
+                <tr>
+                    <td>
+                        @merchant.MerhchantName
+                    </td>
+                    <td>
+                        @merchant.Account
+                    </td>
+                    <td>
+                        @merchant.MaxDailyTransactionAmount
+                    </td>
+                    <td>
+                        @merchant.MinDailyTranAmount
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="center">
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            @for (int i = 1; i <= viewModel.TotalPages; i++)
+            {
+                int index = @i;
+                <a @onclick="@(  () => GetAllAccounts(@index) )" href="#">@i</a>
+            }
+            <a href="#">&raquo;</a>
+        </div>
+    </div>
+}
+
+@code
+{    
+    Merchant[] merchants;
+    List<Merchant> mList = new List<Merchant>();
+
+    public Merchant[] Merc1 { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        viewModel.PageId = 1;
+        viewModel.RowCount = 10;
+
+        merchants = await viewModel.GetMerchantsAsync(DateTime.Now);
+        mList = viewModel.GetAccountList(viewModel.PageId, 10);
+
+        viewModel.EA.GetEvent<DbUpdatedEvent>().Subscribe(GetAllAccounts);
+    }
+    //could make this method async.
+    private async void GetAllAccounts(string message)
+    {
+        //viewModel.GetAccounts();
+
+        mList = viewModel.GetAccountList(viewModel.PageId, viewModel.RowCount);
+        await InvokeAsync(() => StateHasChanged()); 
+        //StateHasChanged();
+    }
+    private void GetAllAccounts(int pageID)
+    {
+
+        mList = viewModel.GetAccountList(pageID, viewModel.RowCount);
+
+        StateHasChanged();
+
+    }
+
+}

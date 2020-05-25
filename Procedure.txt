@@ -1,0 +1,32 @@
+ /// <summary>
+    /// 1. Scafolding a page creates CRUD scripts to execute on the Model class which we have created.
+    /// 2. The model class actually represents a table in the database.
+    /// 3. Using the PMC console we can migrate the model class as a table into the database.
+    /// 4. Scafolding a page can create a context class which creates a new database.
+    /// 5. We can migrate the created model class as a table into the database using the newly created Context class.
+    /// </summary>
+
+Procedure for adding a field/column in and existing table in a  Razor page application.
+1. Create a property in the existing model class.
+2. Enter the following commands into the PMC
+	2.1: add-migration _name_of_property -context _name_of_the_context_class
+	2.2: update-database -context _name_of_the_context_class
+3. These commands will auto generate code in various files and they will also add newly created files in to the migrations folder.
+4. First a new class is created in the migrations folder. The name of the class is the same as the 
+column name/property name in the model class or the one that is supplied to the command. Secondly the ModelSnapshot 
+class is updated. The new column/property is added to the ModelSnapShot class.
+5. These steps complete the procedure of adding a new field/column to an existing table.
+
+Procedure for adding a Table in an existing Database/DbContext in a  Razor page application.
+1. Create a new model class which will be the new table to be added to the database.
+2. Create a folder inside the Pages folder and name it. Add a Scaffolded item to this folder which generates CRUD scripts 
+to execute on the Model class which we have created.
+3. Choose the existing ContextClass/D.B from the scafolded items list. This will add the model class/table to this context class.
+4. Change namespace model to data.
+5. Enter the following commands into the PMC
+	2.1: add-migration _name_of_table -context _name_of_the_context_class
+	2.2: update-database -context _name_of_the_context_class
+6. These commands will auto generate code in various files and they will also add newly created files in to the migrations folder.
+7. First a new class is created in the migrations folder. The name of the class is the same as the the one that is supplied to the 
+command. Secondly the ModelSnapshot class is updated. The new Table is added as an entity to the ModelSnapShot class.
+8. These steps complete the procedure of adding a new Table to an existing database.

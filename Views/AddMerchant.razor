@@ -1,0 +1,51 @@
+﻿@page "/createmerchant"
+<h3>AddMerchant</h3>
+@using RajProj.Data
+@using RajProj.ViewModels
+@using RajProj.Models
+@inject MerchantInfoViewModel  viewModel
+@*<h3>Create Merchant component rendered</h3>
+    <p>This component demonstrates Creating and inserting a merchant object into the Table.</p>
+    <h4>Add a Merchant</h4>*@
+<div class="form-group">
+    <input type="submit" value="Create Merchant" class="btn btn-primary" @onclick="CreateMerchantAccount" />
+</div>
+<div class="row">
+    <div class="col-md-4">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label class="control-label">Page ID</label>
+            <input class="form-control" @bind-value="@viewModel.PageId" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Row Count</label>
+            <input class="form-control" @bind-value="@viewModel.RowCount"  />
+        </div>
+        
+        @*<div class="form-group">
+            <label class="control-label">Create Merchant</label>
+            <input type="submit" value="Create Over Limit Merchant" class="btn btn-primary" @onclick="CreateOMerchantAccount" />
+        </div>*@
+
+    </div>
+</div>
+<div class="form-group">
+    <input type="submit" value="Error Check Function" class="btn btn-primary" @onclick="ErrorCheck" />
+</div>
+
+@code {
+
+    private void CreateMerchantAccount()
+    {
+        viewModel.CreateMerchant();
+        //viewModel.CreateMerchantAccounts(1);
+        viewModel.EA.GetEvent<DbUpdatedEvent>().Publish("Created Merchant");
+    }
+    private void ErrorCheck()
+    {        
+        viewModel.GetAccountList(viewModel.PageId, viewModel.RowCount);
+        viewModel.EA.GetEvent<DbUpdatedEvent>().Publish("Created Merchant");
+     }
+}
+
