@@ -38,8 +38,9 @@
 
     private void CreateMerchantAccount()
     {
+        //Create only 1 Merchant in the db at a time.
         viewModel.CreateMerchant();
-        //viewModel.CreateMerchantAccounts(1);
+        //viewModel.CreateMerchantAccounts(103);
         viewModel.EA.GetEvent<DbUpdatedEvent>().Publish("Created Merchant");
     }
     private void ErrorCheck()

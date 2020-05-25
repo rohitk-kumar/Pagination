@@ -12,6 +12,9 @@ using System.Data;
 
 namespace RajProj.ViewModels
 {
+    /// <summary>
+    /// Implements Pagination.
+    /// </summary>
     public class MerchantInfoViewModel
     {
         private readonly IEventAggregator _ea;
