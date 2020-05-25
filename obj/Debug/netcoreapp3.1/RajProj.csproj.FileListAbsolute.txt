@@ -314,3 +314,4 @@ C:\RajProj\obj\Debug\netcoreapp3.1\staticwebassets\RajProj.StaticWebAssets.xml
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.dll
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.pdb
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.genruntimeconfig.cache
+C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.csprojAssemblyReference.cache

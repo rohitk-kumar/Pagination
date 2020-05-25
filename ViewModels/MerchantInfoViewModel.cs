@@ -159,7 +159,7 @@ namespace RajProj.ViewModels
             int endIndex = (pageId * rowCount);// index to the last row within a page.
             int startIndex = endIndex - rowCount; // index to the starting row within a page.
 
-            if (startIndex >= table.Rows.Count) // check for out of bound row index based on row count
+            if (startIndex >= table.Rows.Count) // check for out of bound  starting row index based on row count
             {                
                 return filteredRow;
             }
