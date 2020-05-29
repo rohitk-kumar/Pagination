@@ -14,6 +14,7 @@ namespace RajProj.ViewModels
 {
     /// <summary>
     /// Implements Pagination.
+    /// Uses MVVM, Dependency Injection and EventAggregator
     /// </summary>
     public class MerchantInfoViewModel
     {
@@ -28,7 +29,7 @@ namespace RajProj.ViewModels
         public int TotalPages { get; set; }
         public int PageId { get; set; }
         public int RowCount { get; set; }
-        private int MaxRows = 50;
+        private int MaxRows = 70;
         private DataTable dTable;
 
         //public MerchantInfoViewModel(MerchantService mService, IEventAggregator ea, Data.RajContext context)
@@ -146,7 +147,7 @@ namespace RajProj.ViewModels
         public List<DataRow> GetAccountList(DataTable table, int pageId, int rowCount)
         {
             List<DataRow> filteredRow = new List<DataRow>();
-            rowCount = rowCount > MaxRows ? 35 : rowCount;
+            rowCount = rowCount > MaxRows ? 45 : rowCount;
             
             //check for negative page and row
             if (pageId < 1 || rowCount < 1)
