@@ -100,7 +100,7 @@ else
 
         viewModel.EA.GetEvent<DbUpdatedEvent>().Subscribe(GetAllAccounts);
     }
-    //could make this method async.
+   
     private async void GetAllAccounts(string message)
     {
         //viewModel.GetAccounts();
@@ -111,11 +111,9 @@ else
     }
     private void GetAllAccounts(int pageID)
     {
-
         mList = viewModel.GetAccountList(pageID, viewModel.RowCount);
 
         StateHasChanged();
-
     }
 
 }

@@ -16,11 +16,11 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label class="control-label">Page ID</label>
-            <input class="form-control" @bind-value="@viewModel.PageId" />
+            <input class="form-control" @bind-value="@viewModel.PageId" />            
         </div>
         <div class="form-group">
             <label class="control-label">Row Count</label>
-            <input class="form-control" @bind-value="@viewModel.RowCount"  />
+            <input class="form-control" @bind-value="@viewModel.RowCount" />           
         </div>
         
         @*<div class="form-group">
@@ -36,17 +36,27 @@
 
 @code {
 
+    protected override async Task OnInitializedAsync()
+    {
+        viewModel.EA.GetEvent<DbUpdatedEvent>().Subscribe(Update);
+    }
     private void CreateMerchantAccount()
     {
         //Create only 1 Merchant in the db at a time.
         viewModel.CreateMerchant();
         //viewModel.CreateMerchantAccounts(103);
         viewModel.EA.GetEvent<DbUpdatedEvent>().Publish("Created Merchant");
+
     }
     private void ErrorCheck()
-    {        
-        viewModel.GetAccountList(viewModel.PageId, viewModel.RowCount);
+    {
+        //viewModel.GetAccountList(viewModel.PageId, viewModel.RowCount);
+        viewModel.GetAccountList();
         viewModel.EA.GetEvent<DbUpdatedEvent>().Publish("Created Merchant");
-     }
+    }
+    private async void Update(string message)
+    {
+        await InvokeAsync(() => StateHasChanged());
+    }
 }
 

@@ -220,6 +220,49 @@ namespace RajProj.ViewModels
             List<DataRow> rowList = GetAccountList(dTable, pageId, rowCount);
             return filteredList; 
         }
+        public List<Merchant> GetAccountList()
+        {
+            Merchants = MerchantService.MerchantList.ToArray();
+            List<Merchant> mList = Merchants.ToList();
+            List<Merchant> filteredList = new List<Merchant>();
+            CheckValidRow(PageId, RowCount);
+            //assign default value to rowCount if rowCount over MaxRows
+            RowCount = RowCount > MaxRows ? 35 : RowCount;
+            //check for negative page and row
+            if (PageId < 1 || RowCount < 1)
+            {
+                Merchants = filteredList.ToArray();
+                TotalPages = 0;
+                return filteredList;
+            }
+
+            int numPages = mList.Count / RowCount;
+            int numRemainder = mList.Count % RowCount;
+            int endIndex = (PageId * RowCount);// index to the last row within a page.
+            int startIndex = endIndex - RowCount; // index to the starting row within a page.
+
+            if (startIndex >= mList.Count) // check for out of bound row index based on row count
+            {
+                Merchants = filteredList.ToArray();
+                TotalPages = 0;
+                return filteredList;
+            }
+            if (numRemainder != 0)
+                numPages++;// add one to total number of page
+
+            TotalPages = numPages;
+
+            if (endIndex > mList.Count) // adjust the end index
+                endIndex = mList.Count; // startIndex + numRemainder
+
+            for (int i = startIndex; i < endIndex; i++)
+            {
+                filteredList.Add(mList[i]);
+            }
+            Merchants = filteredList.ToArray();
+            List<DataRow> rowList = GetAccountList(dTable, PageId, RowCount);
+            return filteredList;
+        }
 
         public void CreateMerchant()
         {
