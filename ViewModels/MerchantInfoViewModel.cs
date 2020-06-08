@@ -9,7 +9,55 @@ using System.Collections.Specialized;
 using Microsoft.JSInterop;
 using System.IO;
 using System.Data;
+using System.ComponentModel;
+using RajProj.ViewModels;
+using ExtensionMethods;
 
+namespace ExtensionMethods
+{
+    public static class MyExtensions
+    {
+        public static DataTable ToDataTable(this List<Merchant> lst)
+        {
+            DataRow dRow;
+            DataTable dTable = new DataTable();
+
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(lst[0]);//gets all column names
+            
+            //add columns to new data table
+            for (int i = 0; i < props.Count; i++)
+            {
+                PropertyDescriptor prop = props[i];
+                dTable.Columns.Add(prop.Name, prop.PropertyType);
+            }
+            object[] values = new object[props.Count];
+
+            //populate data table
+            //foreach (Merchant merchant in lst)
+            //{
+            //    dRow = dTable.NewRow();
+            //    dRow[props[0].Name] = merchant.ID;
+            //    dRow["ID"] = merchant.ID;
+            //    dRow["MerhchantName"] = merchant.MerhchantName;
+            //    dRow["Account"] = merchant.Account;
+            //    dRow["MaxDailyTransactionAmount"] = merchant.MaxDailyTransactionAmount;
+            //    dRow["MinDailyTranAmount"] = merchant.MinDailyTranAmount;
+            //    dTable.Rows.Add(dRow);
+            //}  
+            //populate data table
+            foreach (Merchant merchant in lst)
+            {                
+                for (int i = 0; i < props.Count; i++)
+                {
+                    values[i] = props[i].GetValue(merchant);
+                }
+                dTable.Rows.Add(values);
+            }
+
+            return dTable;
+        }
+    }
+}
 namespace RajProj.ViewModels
 {
     /// <summary>
@@ -46,7 +94,8 @@ namespace RajProj.ViewModels
             EA = _ea;           
             MerchantService = mService;
             dTable = new DataTable("Merchants Table");
-            ConvertToDataTable();
+            //ConvertToDataTable();
+            dTable = MerchantService.MerchantList.ToDataTable();//extension method
             //MerchantList = mService.MerchantList;
         }
         public async Task<Merchant[]> GetMerchantsAsync(DateTime dateTime)
@@ -273,6 +322,18 @@ namespace RajProj.ViewModels
         {
             MerchantService.CreateMerchantAccounts(x);
             Merchants = MerchantService.MerchantList.ToArray();            
+        }
+        public void UseExtMethod()
+        {
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(MerchantService.MerchantList[0]);
+            DataTable table = new DataTable();
+            for (int i = 0; i < props.Count; i++)
+            {
+                PropertyDescriptor prop = props[i];
+                table.Columns.Add(prop.Name, prop.PropertyType);
+            }
+            object[] values = new object[props.Count];
+           
         }
     }
 }

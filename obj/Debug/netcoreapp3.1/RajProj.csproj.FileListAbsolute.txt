@@ -275,6 +275,8 @@ C:\RajProj\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\RajProj\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\RajProj\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\RajProj\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.AssemblyInfoInputs.cache
+C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.AssemblyInfo.cs
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.csproj.CoreCompileInputs.cache
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.MvcApplicationPartsAssemblyInfo.cache
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.RazorComponent.input.cache
@@ -303,8 +305,6 @@ C:\RajProj\obj\Debug\netcoreapp3.1\Razor\_Imports.razor.g.cs
 C:\RajProj\obj\Debug\netcoreapp3.1\Razor\Pages\_Host.cshtml.g.cs
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.RazorAssemblyInfo.cache
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.RazorAssemblyInfo.cs
-C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.AssemblyInfoInputs.cache
-C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.AssemblyInfo.cs
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.RazorTargetAssemblyInfo.cache
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.RazorTargetAssemblyInfo.cs
 C:\RajProj\obj\Debug\netcoreapp3.1\RajProj.Views.pdb

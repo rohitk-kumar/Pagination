@@ -33,6 +33,9 @@
 <div class="form-group">
     <input type="submit" value="Error Check Function" class="btn btn-primary" @onclick="ErrorCheck" />
 </div>
+<div class="form-group">
+    <input type="submit" value="Call Extension Method" class="btn btn-primary" @onclick="ErrorCheck1" />
+</div>
 
 @code {
 
@@ -53,6 +56,11 @@
         //viewModel.GetAccountList(viewModel.PageId, viewModel.RowCount);
         viewModel.GetAccountList();
         viewModel.EA.GetEvent<DbUpdatedEvent>().Publish("Created Merchant");
+    }
+    private void ErrorCheck1()
+    {
+        viewModel.UseExtMethod();
+       
     }
     private async void Update(string message)
     {
